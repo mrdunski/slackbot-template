@@ -120,7 +120,7 @@ spec:
 
 task('dockerTagLatest', type: Exec, dependsOn: 'dockerBuildImage') {
     executable 'docker'
-    args 'tag', "mrdunski/soccero-locker:${project.version}", "mrdunski/$rootProject.name:latest"
+    args 'tag', "mrdunski/${rootProject.name}:${project.version}", "mrdunski/$rootProject.name:latest"
 }
 
 task('dockerPushLatest', type: Exec, dependsOn: 'dockerTagLatest') {
