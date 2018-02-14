@@ -10,7 +10,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "com.bmuschko.docker-java-application"
 
-mainClassName = 'com.leanforge.soccero.SocerroSpringApplication'
+mainClassName = 'com.leanforge.soccero.SocceroSpringApplication'
 applicationDefaultJvmArgs = ["-Xmx256m"]
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
