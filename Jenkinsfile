@@ -11,7 +11,7 @@ node ('docker') {
             sh "docker login -u $user -p $password"
             checkout scm
             sh 'chmod +x ./gradlew'
-            sh "./gradlew dockerPushProjectVersion dockerPushLatest generateK8sFile -Pv=$BUILD_NUMBER"
+            sh "./gradlew dockerPushProjectVersion dockerPushLatest generateK8sFile -Pv=`date -u +%Y%m%d-%H%M%S`"
             archiveArtifacts 'build/deployment.yaml'
             stash includes: 'build/deployment.yaml', name: 'deployment.yaml'
         }
@@ -19,10 +19,12 @@ node ('docker') {
 }
 /*
 node ('kubectl') {
-    stage('deploy') {
-        checkout scm
-        unstash 'deployment.yaml'
-        sh 'kubectl -n leanforge apply -f build/deployment.yaml'
+    stage("deploy") {
+        if(env.BRANCH_NAME == 'master') {
+            checkout scm
+            unstash 'deployment.yaml'
+            sh 'kubectl -n leanforge apply -f build/deployment.yaml'
+        }
     }
 }
 */
